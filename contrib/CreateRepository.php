@@ -1,6 +1,8 @@
 <html>
 <head>
   <title>Create Repository</title>
+        <link rel="stylesheet" type="text/css" href="/gitlist/themes/default/css/style.css">
+
   <style>
 label {
   width: 100px;
