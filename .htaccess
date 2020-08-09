@@ -2,11 +2,10 @@
     Options -MultiViews +SymLinksIfOwnerMatch
 
     RewriteEngine On
-    #RewriteBase /path/to/gitlist/
+    RewriteBase /gitlist/
 
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php/$1 [L,NC]
+    RewriteRule ^(.*)$ index.php?/$1 [L,NC]
 </IfModule>
 <Files config.ini>
     order allow,deny
