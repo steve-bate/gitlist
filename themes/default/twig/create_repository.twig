@@ -1,0 +1,20 @@
+{% extends 'layout.twig' %}
+{% block title %}GitList{% endblock %}
+
+{% block body %}
+{% include 'navigation.twig' %}
+
+  <div class="container">
+
+    <h1>Create Repository</h1>
+    <form action="create_repository" method="post">
+      <label for="name">Name:</label><input name="name" type="text"><br>
+      <label for="description">Description:</label><input name="description" type="text"/><br>
+      <input class="btn" type="submit">
+    </form>
+
+    {% include 'footer.twig' %}
+</div>
+
+
+{% endblock %}

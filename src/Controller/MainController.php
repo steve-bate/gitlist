@@ -21,6 +21,22 @@ class MainController implements ControllerProviderInterface
             ));
         })->bind('homepage');
 
+        $route->get('/create_repository', function () use ($app) {
+            return $app['twig']->render('create_repository.twig', array(
+            ));
+        })->bind('create_repository_form');
+
+        $route->post('/create_repository', function (Request $request, $repo, $branch = '') use ($app) {
+            $name = $request->request->get('name');
+            $desc = $request->request->get('description');
+            $repository = $app['git.repos'][0] . $name;
+            $app['git']->createRepository($repository);
+            $descfile = fopen($repository . '/.git/description', 'w');
+            fwrite($descfile, $desc);
+            fclose($descfile);
+            return $app->redirect($name);
+        })->bind('create_repository');
+
         $route->get('/refresh', function (Request $request) use ($app) {
             // Go back to calling page
             return $app->redirect($request->headers->get('Referer'));

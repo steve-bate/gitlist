@@ -106,7 +106,9 @@ class Application extends SilexApplication
         $this->finish(function () use ($app, $config) {
             if (!$config->get('app', 'cache')) {
                 $fs = new Filesystem();
-                $fs->remove($app['cache.archives']);
+                if ($fs->exists($app['cache.archives'])) {
+                    $fs->remove($app['cache.archives']);
+                }
             }
         });
     }
