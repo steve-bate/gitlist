@@ -29,11 +29,9 @@ class MainController implements ControllerProviderInterface
         $route->post('/create_repository', function (Request $request, $repo, $branch = '') use ($app) {
             $name = $request->request->get('name');
             $desc = $request->request->get('description');
-            $repository = $app['git.repos'][0] . $name;
-            $app['git']->createRepository($repository);
-            $descfile = fopen($repository . '/.git/description', 'w');
-            fwrite($descfile, $desc);
-            fclose($descfile);
+            $repository = $app['git.repos'][0] . $name . '.git';
+            $app['git']->createRepository($repository, true);
+            file_put_contents($repository . '/.git/description', $desc);
             return $app->redirect($name);
         })->bind('create_repository');
 
